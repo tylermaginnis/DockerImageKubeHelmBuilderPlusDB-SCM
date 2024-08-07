@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Backup and Restore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Database Backup and Restore</h1>
+  <button id="dumpButton">Dump Database</button>
+  <button id="loadButton">Load Database</button>
+  <div id="status"></div>
+
+  <script>
+    const dumpButton = document.getElementById('dumpButton');
+    const loadButton = document.getElementById('loadButton');
+    const status = document.getElementById('status');
+
+    dumpButton.addEventListener('click', () => {
+      fetch('/api/dumpDatabase')
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          status.textContent = data;
+        })
+        .catch(error => {
+          console.error('Error dumping database:', error);
+          status.textContent = 'Error dumping database';
+        });
+    });
+
+    loadButton.addEventListener('click', () => {
+      fetch('/api/loadDatabase')
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          status.textContent = data;
+        })
+        .catch(error => {
+          console.error('Error loading database:', error);
+          status.textContent = 'Error loading database';
+        });
+    });
+  </script>
+</body>
+</html>

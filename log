@@ -1,0 +1,244 @@
+Name:             pharma-microservice-deployment-7f4d7857df-57dnf
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Mon, 25 Mar 2024 00:45:30 -0400
+Labels:           app=pharma-microservice
+                  pod-template-hash=7f4d7857df
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.32
+IPs:
+  IP:           10.244.0.32
+Controlled By:  ReplicaSet/pharma-microservice-deployment-7f4d7857df
+Containers:
+  your-microservice:
+    Container ID:   docker://577c1cc20f7f95a6f0df9658ea705da3c5e13c2ee5c96b130265ce6d83346688
+    Image:          youracr.azurecr.io/your-microservice:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/your-microservice@sha256:916e4f1c5ad4c8397589090660b68073661ff158c6b53de95e1472007e669da0
+    Port:           3000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:15 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:15 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-access-control:
+    Container ID:   docker://afc1e4813c7d9d9c3e6e849eff7d413f9ece2edb2ee5f035e1d3fac78cbf77a8
+    Image:          youracr.azurecr.io/pharma-microservice-access-control:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-access-control@sha256:efb4ae276e6eac388e043fc5f544221486a7f0b10ef4cfae8338d83ea8e54bfd
+    Port:           3001/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:15 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:15 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-audit:
+    Container ID:   docker://550946d24a582cb17c9de06cade861946e007a08d326dd93540bc14591e13b12
+    Image:          youracr.azurecr.io/pharma-microservice-audit:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-audit@sha256:a3853f29b6269c18a1faa7becf9103703da90c917b4b3ebdc33547d0b68e3cd4
+    Port:           3002/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:16 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:16 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-inventory:
+    Container ID:   docker://110c910ccf74304fc30fa0e05c8f67329583332ebc2541ea2aa09edf96f7dd7d
+    Image:          youracr.azurecr.io/pharma-microservice-inventory:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-inventory@sha256:797ef21df3315ef94a94d06f69679b9c2ce5d6768ef3877494e590b9031076fb
+    Port:           3003/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:16 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:16 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-login:
+    Container ID:   docker://26522ac4529d8de6e8b5ee5d926ecf18b187f3a6277243e27558bd2fc78ed8af
+    Image:          youracr.azurecr.io/pharma-microservice-login:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-login@sha256:1972168fb98e2ea29d3e9ec60bae1d21237f4fd24c5aa1690610571addfbc391
+    Port:           3004/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:17 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:17 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-report:
+    Container ID:   docker://d3d0e7d100d12daf46a293b2dd0e27890ecd3e60a4e983e50d5306a7eed08e79
+    Image:          youracr.azurecr.io/pharma-microservice-report:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-report@sha256:a03a57604b4c62e5d40d91139804425474862266377524e3bf6bf039ce4576cb
+    Port:           3005/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:18 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:18 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-transaction:
+    Container ID:   docker://163e24c0370077aabe9349f9b8513a439a4f3137acc0c619e72ceca791943cc0
+    Image:          youracr.azurecr.io/pharma-microservice-transaction:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-transaction@sha256:82714b34dbb524ec05cbe3164b6fbb0a3b7bc8d3bc51b3ca11098a335f8078d2
+    Port:           3006/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:18 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:18 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-user:
+    Container ID:   docker://56be4c1b0d18dbba212e736a357fef30676cc7935db6fbe0a48bb652cb599011
+    Image:          youracr.azurecr.io/pharma-microservice-user:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/pharma-microservice-user@sha256:849125ce4d537f1a150c6e31fe8026740eeb89a76bed9061b9b057ba66c0b9d5
+    Port:           3000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 25 Mar 2024 00:46:19 -0400
+      Finished:     Mon, 25 Mar 2024 00:46:19 -0400
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-etcd:
+    Container ID:   docker://6288cc288aa3d958e5f6fa4e88953fb73a5f4d4f24cbc8fcc054f5f44b3843a8
+    Image:          youracr.azurecr.io/etcd:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/etcd@sha256:37efcdadc0556b5f4d21edc6fbe17fcbf60f8f49fd31b930cb4176cb375e6321
+    Ports:          2379/TCP, 2380/TCP
+    Host Ports:     0/TCP, 0/TCP
+    State:          Running
+      Started:      Mon, 25 Mar 2024 00:45:36 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-rabbitmq:
+    Container ID:   docker://533981fad2d249899719d0de8f17ddf3aa2106a39f9603d2624b490f3b6db452
+    Image:          youracr.azurecr.io/rabbitmq:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/rabbitmq@sha256:4d38aa4b31102319fa20536068bcfd96035816ddf9aaa735edcc9409c0ba741c
+    Ports:          5672/TCP, 15672/TCP
+    Host Ports:     0/TCP, 0/TCP
+    State:          Running
+      Started:      Mon, 25 Mar 2024 00:45:37 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+  pharma-microservice-postgresql:
+    Container ID:   docker://bac0d9f13ea946e38d61bc457cb91ea95f8048da31b299d68cf2e6d9ae72a9cb
+    Image:          youracr.azurecr.io/postgresql:latest
+    Image ID:       docker-pullable://youracr.azurecr.io/postgresql@sha256:fa7b2aae4495ba3066af5f30fd6974ac3f369bd8ef94d80f0822a10374030b4c
+    Port:           5432/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Mon, 25 Mar 2024 00:45:55 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lnx9t (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-lnx9t:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  68s   default-scheduler  Successfully assigned default/pharma-microservice-deployment-7f4d7857df-57dnf to minikube
+  Normal  Pulling    69s   kubelet            Pulling image "youracr.azurecr.io/your-microservice:latest"
+  Normal  Pulled     68s   kubelet            Successfully pulled image "youracr.azurecr.io/your-microservice:latest" in 629ms (629ms including waiting)
+  Normal  Created    68s   kubelet            Created container your-microservice
+  Normal  Started    68s   kubelet            Started container your-microservice
+  Normal  Pulling    68s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-access-control:latest"
+  Normal  Pulled     67s   kubelet            Successfully pulled image "youracr.azurecr.io/pharma-microservice-access-control:latest" in 534ms (534ms including waiting)
+  Normal  Created    67s   kubelet            Created container pharma-microservice-access-control
+  Normal  Started    67s   kubelet            Started container pharma-microservice-access-control
+  Normal  Pulling    67s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-audit:latest"
+  Normal  Pulled     67s   kubelet            Successfully pulled image "youracr.azurecr.io/pharma-microservice-audit:latest" in 483ms (483ms including waiting)
+  Normal  Created    67s   kubelet            Created container pharma-microservice-audit
+  Normal  Started    67s   kubelet            Started container pharma-microservice-audit
+  Normal  Pulling    67s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-inventory:latest"
+  Normal  Pulled     66s   kubelet            Successfully pulled image "youracr.azurecr.io/pharma-microservice-inventory:latest" in 478ms (478ms including waiting)
+  Normal  Created    66s   kubelet            Created container pharma-microservice-inventory
+  Normal  Started    66s   kubelet            Started container pharma-microservice-inventory
+  Normal  Pulling    66s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-login:latest"
+  Normal  Pulled     66s   kubelet            Successfully pulled image "youracr.azurecr.io/pharma-microservice-login:latest" in 490ms (490ms including waiting)
+  Normal  Created    66s   kubelet            Created container pharma-microservice-login
+  Normal  Started    65s   kubelet            Started container pharma-microservice-login
+  Normal  Pulling    65s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-report:latest"
+  Normal  Pulled     65s   kubelet            Successfully pulled image "youracr.azurecr.io/pharma-microservice-report:latest" in 460ms (461ms including waiting)
+  Normal  Created    65s   kubelet            Created container pharma-microservice-report
+  Normal  Started    65s   kubelet            Started container pharma-microservice-report
+  Normal  Pulling    65s   kubelet            Pulling image "youracr.azurecr.io/pharma-microservice-transaction:latest"

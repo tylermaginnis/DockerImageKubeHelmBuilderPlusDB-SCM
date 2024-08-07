@@ -1,0 +1,277 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perks-microservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: perks-microservice
+  template:
+    metadata:
+      labels:
+        app: perks-microservice
+    spec:
+      containers:
+      - name: your-microservice-api-nx-client
+        image: youracr.azurecr.io/your-microservice-api-nx-client:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 4001
+          name: http
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      - name: your-microservice-api-login
+        image: youracr.azurecr.io/your-microservice-api-login:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 4000
+          name: http
+        resources:
+          limits:
+            cpu: 300m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+      - name: your-postgresql
+        image: youracr.azurecr.io/your-postgresql:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 300m
+            memory: "1Gi"
+          requests:
+            cpu: 100m
+            memory: "512Mi"
+        ports:
+        - containerPort: 5432
+          name: postgresql
+      - name: your-nginx
+        image: youracr.azurecr.io/your-nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8888
+          name: nginx
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      - name: perks-front
+        image: youracr.azurecr.io/your-perks-front:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5173
+          name: perks-front
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+      - name: perks-admin
+        image: youracr.azurecr.io/perks-admin:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5174
+          name: perks-front
+        env:
+          - name: RABBITMQ_URL
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq-secret
+                key: RABBITMQ_URL
+          - name: AUTH_URL
+            value: "http://localhost:4000"
+          - name: NX_SERVICES_URL
+            value: "http://localhost:4001"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+      imagePullSecrets:
+        - name: youracr3
+
+---
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-microservice
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-microservice-api-login
+spec:
+  selector:
+    app: perks-microservice
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-microservice-nx-services
+spec:
+  selector:
+    app: perks-microservice
+  ports:
+    - protocol: TCP
+      port: 6969
+      targetPort: 6969
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-microservice-api-getmessages
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 4001
+      targetPort: 4001
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-rabbitmq-amqp
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-rabbitmq-management
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-postgresql
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: your-nginx
+spec:
+  selector:
+    app: pharma-microservice
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pharma-microservice-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /nextech
+        pathType: Prefix
+        backend:
+          service:
+            name: your-microservice
+            port:
+              number: 3000
+      - path: /login
+        pathType: Prefix
+        backend:
+          service:
+            name: your-microservice-producer-login
+            port:
+              number: 4000
+      - path: /getmessages
+        pathType: Prefix
+        backend:
+          service:
+            name: your-microservice-api-getmessages
+            port:
+              number: 4001
+      - path: /amqp
+        pathType: Prefix
+        backend:
+          service:
+            name: your-rabbitmq-amqp
+            port:
+              number: 5672
+      - path: /management
+        pathType: Prefix
+        backend:
+          service:
+            name: your-rabbitmq-management
+            port:
+              number: 15672
+      - path: /postgresql
+        pathType: Prefix
+        backend:
+          service:
+            name: your-postgresql
+            port:
+              number: 5432
+      - path: /nginx
+        pathType: Prefix
+        backend:
+          service:
+            name: your-nginx
+            port:
+              number: 8888

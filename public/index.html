@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Image Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #buildStatus {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Docker Image Builder</h1>
+  <ul id="dockerfileList"></ul>
+  <button id="buildButton">Build Selected Images</button>
+  <button id="deleteButton">Delete All Pods</button>
+  <div id="buildStatus"></div>
+  <div>
+    <label>
+      <input type="checkbox" id="selectAllCheckbox" onchange="selectAllCheckboxes(this)">
+      Select All
+    </label>
+  </div>
+
+  <script>
+    function selectAllCheckboxes(selectAllCheckbox) {
+      const checkboxes = document.querySelectorAll('#dockerfileList input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+      });
+    }
+  </script>
+  <script>
+    const dockerfileList = document.getElementById('dockerfileList');
+    const buildButton = document.getElementById('buildButton');
+    const buildStatus = document.getElementById('buildStatus');
+
+    fetch('/api/dockerfiles')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(dockerfile => {
+          const listItem = document.createElement('li');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.value = dockerfile;
+          listItem.appendChild(checkbox);
+          listItem.appendChild(document.createTextNode(dockerfile));
+          dockerfileList.appendChild(listItem);
+        });
+      });
+
+    buildButton.addEventListener('click', () => {
+      const selectedImages = Array.from(dockerfileList.querySelectorAll('input:checked'))
+        .map(checkbox => checkbox.value);
+
+      fetch('/api/build', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ selectedImages })
+      })
+        .then(() => {
+          console.log('Build request sent');
+          buildStatus.textContent = 'Build in progress...';
+          pollBuildStatus();
+        });
+    });
+
+    function pollBuildStatus() {
+      fetch('/api/buildStatus')
+        .then(response => response.json())
+        .then(data => {
+          if (data.buildInProgress) {
+            console.log('Build in progress...');
+            setTimeout(pollBuildStatus, 5000);
+          } else {
+            console.log('Build completed');
+            buildStatus.textContent = 'Build completed';
+          }
+        });
+    }
+
+    function deletePods() {
+      fetch('/api/deletePods')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Pods deletion initiated successfully.');
+        });
+    }
+
+    deleteButton.addEventListener('click', () => {
+      deletePods();
+    });
+  </script>
+</body>
+</html>
