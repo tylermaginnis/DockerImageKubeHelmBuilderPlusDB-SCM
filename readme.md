@@ -15,7 +15,8 @@ The `HelmUpdate.js` script reads the `versioning.json` file to determine the hig
 ### Usage:
 
 ```bash
-node HelmUpdate.js```
+node HelmUpdate.js
+```
 
 ## DockerBuild.js
 
