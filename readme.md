@@ -48,7 +48,8 @@ To build Docker images, send a POST request to `/api/build` with the selected im
 ```json
 {
 "selectedImages": ["image1", "image2"]
-}```
+}
+```
 
 
 
@@ -74,7 +75,8 @@ The `versioning.json` file keeps track of the versions of the Docker images. The
 "ACR": "youracr.azurecr.io",
 "Port": "8081"
 }
-]```
+]
+```
 
 
 ## Dependencies
